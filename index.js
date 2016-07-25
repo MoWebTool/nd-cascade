@@ -41,6 +41,8 @@ var Cascade = Overlay.extend({
     itemSelectedClass: 'ui-cascade-selected',
     itemHoverClass: 'ui-cascade-item-hover',
     triggerClass: 'ui-cascade-trigger',
+    // 重写默认的z-index: 99 => 9999
+    zIndex: 9999
 
     trigger: {
       value: null,
@@ -245,13 +247,15 @@ var Cascade = Overlay.extend({
   },
 
   _setTriggerWidth: function() {
-    var trigger = this.get('trigger'),
-      elementWidth = this.element.outerWidth(),
-      triggerOutWidth = trigger.outerWidth(),
-      width = triggerOutWidth > elementWidth ? triggerOutWidth : elementWidth
+    var originTrigger = this.get('originTrigger')
+    var trigger = this.get('trigger')
 
+    // var elementWidth = this.element.outerWidth()
+    var width = originTrigger.outerWidth()
+    // var  width = originTriggerOutWidth > elementWidth ? originTriggerOutWidth : elementWidth
+
+    // newTigger 与 overlay 的宽度始终与 originTrigger 保持一致
     trigger.css('width', width)
-
     // 因为 trigger 的宽度可能受 CSS（如 max-width） 限制，
     // 最后将 element 的宽度设置为与 trigger 等宽
     this.element.css('width', width)
