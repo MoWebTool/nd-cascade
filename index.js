@@ -41,8 +41,8 @@ var Cascade = Overlay.extend({
     itemSelectedClass: 'ui-cascade-selected',
     itemHoverClass: 'ui-cascade-item-hover',
     triggerClass: 'ui-cascade-trigger',
-    // 重写默认的z-index: 99 => 9999
-    zIndex: 9999
+    // 重写默认的z-index: 99 => 999
+    zIndex: 999,
 
     trigger: {
       value: null,
