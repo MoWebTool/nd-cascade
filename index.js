@@ -44,6 +44,9 @@ var Cascade = Overlay.extend({
     // 重写默认的z-index: 99 => 999
     zIndex: 999,
 
+    // 支持是否必须所有Tab全选才设置值，默认值：true
+    force: true,
+
     trigger: {
       value: null,
       getter: function(val) {
@@ -288,7 +291,9 @@ var Cascade = Overlay.extend({
     //设置要显示的数据和提交的数据
     this.setTriggerContent(this.getTexts().join(this.get('delimiter')))
     //必须全部选择了才设置值
-    if (this.get('length') === this.get('tabs').length) {
+    if (this.get('force') && this.get('length') === this.get('tabs').length) {
+      this.set('value', this.get('outValues').call(this, this.getSelected()))
+    } else if (!this.get('force') && this.get('length') >= 1){
       this.set('value', this.get('outValues').call(this, this.getSelected()))
     }
   }
