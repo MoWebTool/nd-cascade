@@ -173,7 +173,10 @@ var Cascade = Overlay.extend({
     //对selectList按照index排序
     selectList = quickSort('index')(selectList)
     this.set('length', next)
-    next >= length ? this.hide() : (function() {
+    next >= length ? (function() {
+      that.trigger('setLastData', next, value)
+      that.hide()
+    })() : (function() {
       //选了除了最后一个面板都要
       selectList.splice(next, length - next)
       //清空后面的板块内容
